@@ -1,6 +1,6 @@
 <strings>
-    <string id="AppName">GarminHOTP</string>
-    <string scope="glance" id="GlanceTitle">GarminHOTP</string>
+    <string id="AppName">HOTP Codes</string>
+    <string scope="glance" id="GlanceTitle">HOTP Codes</string>
 
     <string scope="glance" id="LiveGlance">false</string>
     <string id="Instinct">false</string>

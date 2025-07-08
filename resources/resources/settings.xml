@@ -45,7 +45,7 @@
         <property id="enabled6" type="boolean" />
         <property id="name6" type="string" />
         <property id="code6" type="string" />
-        <property id="algo6" type="string" />
+        <property id="algo6" type="number">0</property>
         <property id="digits6" type="number">6</property>
         <property id="timeStep6" type="number">30</property>
         <property id="otpType6" type="number">0</property>

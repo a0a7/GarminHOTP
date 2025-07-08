@@ -1,8 +1,6 @@
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
 
-# GarminHOTP
-
-GarminHOTP is a Connect IQ widget that generates both Time-based (TOTP) and HMAC-based (HOTP) one-time passwords used for 2-factor authentication. It is compatible with Google Authenticator and other similar systems.
+# HOTP Codes
 
 It supports SHA-1 and SHA-256 based codes for both TOTP and HOTP authentication methods.
 
@@ -52,7 +50,7 @@ See examples in the [wiki](https://github.com/uaraven/otpauth-ciq/wiki)
 
 ## Compatibility
 
-GarminHOTP should run on any Garmin watch supporting Connect IQ version 3.1 or higher.
+HOTP Codes should run on any Garmin watch supporting Connect IQ version 3.1 or higher.
 If the "Glances" column contains word "Live" then live updates for glances are supported for the device.
 
 Devices listed in the table below were tested at least with the simulator. Bear in mind that Garmin simulator is not 100% accurate and therefore there might be various problems with some devices that were not detected. [Open an issue](<(https://github.com/uaraven/otpauth-ciq/issues)>) and describe the problem to get it fixed.
