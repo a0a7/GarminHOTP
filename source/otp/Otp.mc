@@ -46,13 +46,23 @@ module Otp {
 
   class Hotp extends BaseOtp {
     private var counter;
+    private var counterKey as String?;
 
     // secretKey - secret value encoded with Base32
     // algorithm - 0 = SHA-1, 1 = SHA-256
     // digitCount - number of digits in the OTP code
-    function initialize(secretKey, algorithm, digitCount) {
+    // counterKey - storage key for persisting counter (optional)
+    function initialize(secretKey, algorithm, digitCount, counterKey) {
       BaseOtp.initialize(secretKey, digitCount, algorithm);
-      counter = 0;
+      self.counterKey = counterKey;
+      if (counterKey != null) {
+        counter = Application.Storage.getValue(counterKey);
+        if (counter == null) {
+          counter = 0;
+        }
+      } else {
+        counter = 0;
+      }
     }
 
     protected function intToBytes(v as Numeric) {
@@ -68,6 +78,10 @@ module Otp {
     protected function generate() as String {
       var text = intToBytes(counter);
       counter += 1;
+      // Save counter to storage if key is provided
+      if (counterKey != null) {
+        Application.Storage.setValue(counterKey, counter);
+      }
       var hash =
         Hmac.hmacSha(getSecret(), getAlgorithm(), text) as Array<Number>;
       var offset = (hash[hash.size() - 1] & 0x0f).toNumber();
@@ -92,6 +106,17 @@ module Otp {
 
     function setCounter(newCounter) {
       self.counter = newCounter;
+      // Save counter to storage if key is provided
+      if (counterKey != null) {
+        Application.Storage.setValue(counterKey, counter);
+      }
+    }
+
+    function resetCounter() {
+      counter = 0;
+      if (counterKey != null) {
+        Application.Storage.setValue(counterKey, counter);
+      }
     }
   }
 
@@ -105,7 +130,7 @@ module Otp {
     // digitCount - number of digits in the OTP code
     // timeStep - time window for a TOTP code
     function initialize(secretKey, algorithm, digitCount, timeStep) {
-      Hotp.initialize(secretKey, algorithm, digitCount);
+      Hotp.initialize(secretKey, algorithm, digitCount, null);
       self.timeStep = timeStep;
       self.cachedCode = null;
       self.cachedTime = 0 as Long;
@@ -174,6 +199,29 @@ module Otp {
     return totp;
   }
 
+  function HotpFromBase32(key as String, counterKey as String) as Hotp {
+    var secret = Base32.base32decode(key);
+    var hotp = new Hotp(secret, 0, 6, counterKey);
+    return hotp;
+  }
+
+  function HotpFromBase32Digits(key as String, digits as Numeric, counterKey as String) as Hotp {
+    var secret = Base32.base32decode(key);
+    var hotp = new Hotp(secret, 0, digits, counterKey);
+    return hotp;
+  }
+
+  function HotpFromBase32AlgoDigits(
+    key as String,
+    algo as Numeric,
+    digits as Numeric,
+    counterKey as String
+  ) as Hotp {
+    var secret = Base32.base32decode(key);
+    var hotp = new Hotp(secret, algo, digits, counterKey);
+    return hotp;
+  }
+
   (:test)
   function TestOtp(logger as Test.Logger) {
     var key = "12345678901234567890";
@@ -239,5 +287,34 @@ module Otp {
     } else {
       return true;
     }
+  }
+
+  (:test)
+  function TestHotp(logger as Test.Logger) {
+    var key = "12345678901234567890";
+    var hotp = new Hotp(key.toUtf8Array(), 0, 8, null);
+    
+    // Test vectors from RFC 4226
+    var expected = "755224";
+    hotp.setCounter(0);
+    var actual = hotp.code();
+    if (!expected.equals(actual.subStringUTF8(2, 6))) {
+      logger.debug(
+        Lang.format("Expected: '$1$', actual: '$2$'", [expected, actual])
+      );
+      return false;
+    }
+
+    expected = "287082";
+    hotp.setCounter(1);
+    actual = hotp.code();
+    if (!expected.equals(actual.subStringUTF8(2, 6))) {
+      logger.debug(
+        Lang.format("Expected: '$1$', actual: '$2$'", [expected, actual])
+      );
+      return false;
+    }
+
+    return true;
   }
 }

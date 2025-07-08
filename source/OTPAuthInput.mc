@@ -9,7 +9,15 @@ class OTPAuthInput extends WatchUi.BehaviorDelegate {
   }
 
   function onSelect() {
-    onNextPage();
+    var otpCode = otpView.getCurrentOtpCode();
+    if (otpCode != null && otpCode.isHotp()) {
+      // For HOTP, generate next code on select
+      otpCode.getOtp().code(); // This will increment the counter
+      otpView.requestUpdate();
+    } else {
+      // For TOTP or multiple accounts, go to next account
+      onNextPage();
+    }
     return true;
   }
 

@@ -32,6 +32,7 @@ class OTPAuthView extends WatchUi.View {
   var noCodes as WatchUi.Text?;
   var code as WatchUi.Text?;
   var name as WatchUi.Text?;
+  var otpType as WatchUi.Text?;
 
   var screenHeight as Number?;
 
@@ -62,6 +63,7 @@ class OTPAuthView extends WatchUi.View {
     code = View.findDrawableById("code") as WatchUi.Text;
     name = View.findDrawableById("name") as WatchUi.Text;
     noCodes = View.findDrawableById("no_codes") as WatchUi.Text;
+    otpType = View.findDrawableById("otp_type") as WatchUi.Text;
 
     screenHeight = dc.getHeight();
     codeY = code.locY;
@@ -167,24 +169,34 @@ class OTPAuthView extends WatchUi.View {
       if (codeStore.isEmpty()) {
         code.setText("");
         name.setText("");
+        otpType.setText("");
       } else {
         var otpCode = codeStore.getOtpCode();
         noCodes.setText("");
         code.setText(otpCode.getOtp().code());
         name.setText(otpCode.getName());
+        if (otpCode.isHotp()) {
+          otpType.setText("HOTP - Tap to generate next");
+        } else {
+          otpType.setText("TOTP");
+        }
       }
     }
     View.onUpdate(dc);
     if (!codeStore.isEmpty()) {
-      if (isCrossover) {
-        drawTimestepCrossover();
-      } else if (isInstinct) {
-        drawTimeStepInstinct(dc);
-      } else {
-        if (screenShape == System.SCREEN_SHAPE_ROUND) {
-          drawTimeStepRound(dc);
+      var otpCode = codeStore.getOtpCode();
+      // Only show time-based progress for TOTP
+      if (otpCode.isTotp()) {
+        if (isCrossover) {
+          drawTimestepCrossover();
+        } else if (isInstinct) {
+          drawTimeStepInstinct(dc);
         } else {
-          drawTimeStepSquare(dc);
+          if (screenShape == System.SCREEN_SHAPE_ROUND) {
+            drawTimeStepRound(dc);
+          } else {
+            drawTimeStepSquare(dc);
+          }
         }
       }
       drawIndicator(dc);
@@ -231,15 +243,17 @@ class OTPAuthView extends WatchUi.View {
 
   (:crossover)
   function drawTimestepCrossover() as Void {
-    var percentTimeLeft = codeStore.getOtpCode().getOtp().getPercentTimeLeft();
+    var otpCode = codeStore.getOtpCode();
+    if (otpCode.isTotp()) {
+      var percentTimeLeft = otpCode.getOtp().getPercentTimeLeft();
+      var angle = 180 * percentTimeLeft - 90;
 
-    var angle = 180 * percentTimeLeft - 90;
-
-    setClockHandPosition({
-      :clockState => ANALOG_CLOCK_STATE_HOLDING,
-      :hour => -90,
-      :minute => angle,
-    });
+      setClockHandPosition({
+        :clockState => ANALOG_CLOCK_STATE_HOLDING,
+        :hour => -90,
+        :minute => angle,
+      });
+    }
   }
 
   (:allDevices)
@@ -316,6 +330,14 @@ class OTPAuthView extends WatchUi.View {
   }
 
   function onTimer() as Void {
+    WatchUi.requestUpdate();
+  }
+
+  function getCurrentOtpCode() {
+    return codeStore.getOtpCode();
+  }
+
+  function requestUpdate() {
     WatchUi.requestUpdate();
   }
 

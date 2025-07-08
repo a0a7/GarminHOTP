@@ -21,6 +21,14 @@ class OtpCode {
   function getName() {
     return name;
   }
+
+  function isHotp() {
+    return otp instanceof Otp.Hotp && !(otp instanceof Otp.Totp);
+  }
+
+  function isTotp() {
+    return otp instanceof Otp.Totp;
+  }
 }
 
 (:glance)
@@ -57,15 +65,22 @@ class CodeStore {
     var algo = Application.Properties.getValue("algo" + index);
     var digits = Application.Properties.getValue("digits" + index);
     var timeStep = Application.Properties.getValue("timeStep" + index);
+    var otpType = Application.Properties.getValue("otpType" + index);
+    
     if (!enabled || "".equals(secret)) {
       return null;
     }
-    var otp = Otp.TotpFromBase32AlgoDigitsTimeStep(
-      secret,
-      algo,
-      digits,
-      timeStep
-    );
+    
+    var otp;
+    if (otpType == 1) {
+      // HOTP
+      var counterKey = "counter" + index;
+      otp = Otp.HotpFromBase32AlgoDigits(secret, algo, digits, counterKey);
+    } else {
+      // TOTP (default)
+      otp = Otp.TotpFromBase32AlgoDigitsTimeStep(secret, algo, digits, timeStep);
+    }
+    
     return new OtpCode(otp, name);
   }
 

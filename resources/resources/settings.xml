@@ -7,14 +7,16 @@
         <property id="code1" type="string" />
         <property id="algo1" type="number">0</property>
         <property id="digits1" type="number">6</property>
-        <property id="timeStep2" type="number">30</property>
+        <property id="timeStep1" type="number">30</property>
+        <property id="otpType1" type="number">0</property>
 
         <property id="enabled2" type="boolean" />
         <property id="name2" type="string" />
         <property id="code2" type="string" />
         <property id="algo2" type="number">0</property>
         <property id="digits2" type="number">6</property>
-        <property id="timeStep1" type="number">30</property>
+        <property id="timeStep2" type="number">30</property>
+        <property id="otpType2" type="number">0</property>
 
         <property id="enabled3" type="boolean" />
         <property id="name3" type="string" />
@@ -22,6 +24,7 @@
         <property id="algo3" type="number">0</property>
         <property id="digits3" type="number">6</property>
         <property id="timeStep3" type="number">30</property>
+        <property id="otpType3" type="number">0</property>
 
         <property id="enabled4" type="boolean" />
         <property id="name4" type="string" />
@@ -29,6 +32,7 @@
         <property id="algo4" type="number">0</property>
         <property id="digits4" type="number">6</property>
         <property id="timeStep4" type="number">30</property>
+        <property id="otpType4" type="number">0</property>
 
         <property id="enabled5" type="boolean" />
         <property id="name5" type="string" />
@@ -36,13 +40,15 @@
         <property id="algo5" type="number">0</property>
         <property id="digits5" type="number">6</property>
         <property id="timeStep5" type="number">30</property>
+        <property id="otpType5" type="number">0</property>
 
         <property id="enabled6" type="boolean" />
         <property id="name6" type="string" />
         <property id="code6" type="string" />
-        <property id="algo6" type="number">0</property>
+        <property id="algo6" type="string" />
         <property id="digits6" type="number">6</property>
         <property id="timeStep6" type="number">30</property>
+        <property id="otpType6" type="number">0</property>
 
         <property id="enabled7" type="boolean" />
         <property id="name7" type="string" />
@@ -50,6 +56,7 @@
         <property id="algo7" type="number">0</property>
         <property id="digits7" type="number">6</property>
         <property id="timeStep7" type="number">30</property>
+        <property id="otpType7" type="number">0</property>
 
         <property id="enabled8" type="boolean" />
         <property id="name8" type="string" />
@@ -57,6 +64,7 @@
         <property id="algo8" type="number">0</property>
         <property id="digits8" type="number">6</property>
         <property id="timeStep8" type="number">30</property>
+        <property id="otpType8" type="number">0</property>
 
         <property id="enabled9" type="boolean" />
         <property id="name9" type="string" />
@@ -64,6 +72,7 @@
         <property id="algo9" type="number">0</property>
         <property id="digits9" type="number">6</property>
         <property id="timeStep9" type="number">30</property>
+        <property id="otpType9" type="number">0</property>
 
         <property id="enabled10" type="boolean" />
         <property id="name10" type="string" />
@@ -71,6 +80,7 @@
         <property id="algo10" type="number">0</property>
         <property id="digits10" type="number">6</property>
         <property id="timeStep10" type="number">30</property>
+        <property id="otpType10" type="number">0</property>
     </properties>
 
     <settings>
@@ -105,6 +115,12 @@
         <setting propertyKey="@Properties.timeStep1" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
         </setting>
+        <setting propertyKey="@Properties.otpType1" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
+        </setting>
         <!-- Next entry -->
         <setting propertyKey="@Properties.enabled2" title="@Strings.enabled2">
             <settingConfig type="boolean" />
@@ -132,6 +148,12 @@
         </setting>
         <setting propertyKey="@Properties.timeStep2" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.otpType2" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
         </setting>
         <!-- Next entry -->
         <setting propertyKey="@Properties.enabled3" title="@Strings.enabled3">
@@ -161,6 +183,12 @@
         <setting propertyKey="@Properties.timeStep3" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
         </setting>
+        <setting propertyKey="@Properties.otpType3" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
+        </setting>
         <!-- Next entry -->
         <setting propertyKey="@Properties.enabled4" title="@Strings.enabled4">
             <settingConfig type="boolean" />
@@ -188,6 +216,12 @@
         </setting>
         <setting propertyKey="@Properties.timeStep4" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.otpType4" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
         </setting>
         <!-- Next entry -->
         <setting propertyKey="@Properties.enabled5" title="@Strings.enabled5">
@@ -217,6 +251,12 @@
         <setting propertyKey="@Properties.timeStep5" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
         </setting>
+        <setting propertyKey="@Properties.otpType5" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
+        </setting>
         <!-- Next entry -->
         <setting propertyKey="@Properties.enabled6" title="@Strings.enabled6">
             <settingConfig type="boolean" />
@@ -244,6 +284,12 @@
         </setting>
         <setting propertyKey="@Properties.timeStep6" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.otpType6" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
         </setting>
         <!-- Next entry -->
         <setting propertyKey="@Properties.enabled7" title="@Strings.enabled7">
@@ -273,6 +319,12 @@
         <setting propertyKey="@Properties.timeStep7" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
         </setting>
+        <setting propertyKey="@Properties.otpType7" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
+        </setting>
         <!-- Next entry -->
         <setting propertyKey="@Properties.enabled8" title="@Strings.enabled8">
             <settingConfig type="boolean" />
@@ -300,6 +352,12 @@
         </setting>
         <setting propertyKey="@Properties.timeStep8" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.otpType8" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
         </setting>
         <!-- Next entry -->
         <setting propertyKey="@Properties.enabled9" title="@Strings.enabled9">
@@ -329,6 +387,12 @@
         <setting propertyKey="@Properties.timeStep9" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
         </setting>
+        <setting propertyKey="@Properties.otpType9" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
+        </setting>
         <!-- Next entry -->
         <setting propertyKey="@Properties.enabled10" title="@Strings.enabled10">
             <settingConfig type="boolean" />
@@ -356,6 +420,18 @@
         </setting>
         <setting propertyKey="@Properties.timeStep10" title="@Strings.timeStep">
             <settingConfig type="numeric" min="30"></settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.otpType10" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.otpType10" title="@Strings.otpType">
+            <settingConfig type="list">
+                <listEntry value="0">@Strings.totp</listEntry>
+                <listEntry value="1">@Strings.hotp</listEntry>
+            </settingConfig>
         </setting>
     </settings>
 

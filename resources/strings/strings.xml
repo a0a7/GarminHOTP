@@ -1,11 +1,18 @@
 <strings>
-    <string id="AppName">2FA Codes</string>
-    <string scope="glance" id="GlanceTitle">2FA Codes</string>
+    <string id="AppName">GarminHOTP</string>
+    <string scope="glance" id="GlanceTitle">GarminHOTP</string>
 
     <string scope="glance" id="LiveGlance">false</string>
     <string id="Instinct">false</string>
 
     <string id="NoCodes">Add auth codes\nin Connect Mobile</string>
+
+    <string id="otpType">OTP Type</string>
+    <string id="totp">TOTP (Time-based)</string>
+    <string id="hotp">HOTP (Counter-based)</string>
+    <string id="timeStep">Time Step (seconds)</string>
+    <string id="digits">Digits</string>
+    <string id="algo">Algorithm</string>
 
     <string id="digits6">6</string>
     <string id="digits7">7</string>
@@ -15,6 +22,12 @@
 
     <string id="sha1">SHA-1</string>
     <string id="sha256">SHA-256</string>
+
+    <string id="totp">TOTP (Time-based)</string>
+    <string id="hotp">HOTP (Counter-based)</string>
+
+    <string id="timeStep">Time step (seconds)</string>
+    <string id="otpType">OTP Type</string>
 
     <string id="show_glance">Show code in glance view</string>
 
