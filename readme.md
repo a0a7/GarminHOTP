@@ -1,31 +1,10 @@
-[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
+# HOTP Code Generator for Garmin - [Connect IQ Store Page](https://apps.garmin.com/apps/b3ae41f2-3710-4368-a365-4d1ba1b3770c)
 
-# HOTP Codes
+This is a widget to generate HOTP and TOTP 2FA codes on Garmin devices. It works with DUO security, Google Authenticator, and similar 2fa code solutions.
 
-It supports SHA-1 and SHA-256 based codes for both TOTP and HOTP authentication methods.
+![](img/screens/non-live-update-glance.png)
 
-## Usage
-
-If your device supports glances then you'll get the widget in your glance list in one of the two forms
-depicted in the pictures below.
-
-![](img/screens/live-update-glance.png) ![](img/screens/non-live-update-glance.png)
-
-If the devices is powerful enough to support live updates you'll see the code for the last account you
-opened and shrinking progress bar showing you how soon the code will change (for TOTP accounts).
-
-If live updates are not supported (or you have not configured any accounts yet) you'll see just the name
-of the widget.
-
-Activating the glance (with a tap and/or select button) will open the full widget. If your device doesn't support glances you will see the full widget in the list of widgets.
-
-![](img/screens/main-widget.png) ![](img/screens/instinct2.png)
-
-If there are more than one account configured you'll see dots indicating the active one on the left side of the screen.
-
-Flick the screen or use up/down buttons to scroll through the accounts. You can use tap or select button to go through the accounts as well. If your device doesn't support glances, you will have to use select button/tap, as up/down buttons will scroll through the widgets.
-
-### TOTP vs HOTP
+### Usage
 
 The app supports both Time-based OTP (TOTP) and HMAC-based OTP (HOTP):
 
@@ -33,6 +12,8 @@ The app supports both Time-based OTP (TOTP) and HMAC-based OTP (HOTP):
 - **HOTP** accounts require manual generation of the next code by tapping the screen or using the select button when viewing the account
 
 For HOTP accounts, the current counter value is maintained and automatically incremented each time a new code is generated. The counter persists between app sessions.
+
+![](img/screens/main-widget.png) 
 
 **Why not always show auth code in glances?**
 
@@ -42,60 +23,9 @@ For HOTP accounts, glances will show the last generated code, but new codes must
 
 Devices that have less resources will give an application a change to update the glance only once. There is no way to know when the glance could be updated next time. The only guarantee is that will not happen in the next 30 seconds. Given than most (if not all) TOTP codes have a time window of 30 seconds there are good chances that the code displayed in the widget glance is out of date by the time you use it to authenticate. For HOTP accounts, the displayed code remains valid until the next code is generated. It might work, depending on the authentication server status, but it is way more reliable just to open the full widget and have up to date code displayed along with countdown timer (for TOTP) or manual generation (for HOTP).
 
-See the table below to check which devices support live updates.
-
-## Set up
-
-See examples in the [wiki](https://github.com/uaraven/otpauth-ciq/wiki)
-
 ## Compatibility
 
 HOTP Codes should run on any Garmin watch supporting Connect IQ version 3.1 or higher.
-If the "Glances" column contains word "Live" then live updates for glances are supported for the device.
-
-Devices listed in the table below were tested at least with the simulator. Bear in mind that Garmin simulator is not 100% accurate and therefore there might be various problems with some devices that were not detected. [Open an issue](<(https://github.com/uaraven/otpauth-ciq/issues)>) and describe the problem to get it fixed.
-
-Almost all newer (2020 and later) devices support Live glances, so if you cannot find your device in the table below, it most likely
-means that it is new enough.
-
-| Device                                          |  Glances  |
-| :---------------------------------------------- | :-------: |
-| Fenix 5/5s/5x                                   |    No     |
-| Fenix 5 plus/5s plus/5x plus                    |    No     |
-| Fenix Chronos                                   |    No     |
-| Fenix 6                                         |    Yes    |
-| Fenix 6pro                                      | Yes, Live |
-| Enduro                                          |    Yes    |
-| Venu                                            |    No     |
-| Venu Mercedes-Benz                              |    No     |
-| Venu Sq/Sq Music                                |    No     |
-| Venu 2/2s/2plus                                 | Yes, Live |
-| Venu Sq 2, Sq 2 Music                           | Yes, Live |
-| Fenix 7/7s/7x                                   | Yes, Live |
-| Fexix 7/7s/7x pro                               | Yes, Live |
-| Epix 2                                          | Yes, Live |
-| Epix 2 pro                                      | Yes, Live |
-| Forerunner 55                                   |    Yes    |
-| Forerunner 245                                  |    Yes    |
-| Forerunner 245 Music                            | Yes, Live |
-| Forerunner 255/255 Music/255s/255s Music        | Yes, Live |
-| Forerunner 265/265s                             | Yes, Live |
-| Forerunner 645/645 Music                        |    No     |
-| Forerunner 745                                  | Yes, Live |
-| Forerunner 935                                  |    Yes    |
-| Forerunner 945/945LTE                           | Yes, Live |
-| Forerunner 955                                  | Yes, Live |
-| Forerunner 965                                  | Yes, Live |
-| Vivoactive 3/3 Music /3 Music LTE               |    No     |
-| Vivoactive 4/4s                                 |    No     |
-| Instinct 2/2s                                   |    Yes    |
-| Descent G1                                      |    Yes    |
-| D2 Air/Delta/Delta PX/Delta S                   |    No     |
-| D2 Air X10                                      | Yes, Live |
-| Descent Mk2/Mk2i/Mk2 S                          | Yes, Live |
-| Rey, Darth Vader, Captain Marvel, First Avenger |    No     |
-| MARQ (Various)                                  |    Yes    |
-| MARQ 2                                          | Yes, Live |
 
 # License
 
